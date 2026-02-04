@@ -1,109 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-  <link href="https://api.fontshare.com/v2/css?f[]=melodrama@400,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Satoshi', sans-serif;
-      overflow: hidden;
-    }
-    .font-serif {
-      font-family: 'Melodrama', serif;
-    }
-    @keyframes float {
-      0% { transform: translateY(0px) rotate(0deg); opacity: 0; }
-      50% { opacity: 0.5; }
-      100% { transform: translateY(-100px) rotate(20deg); opacity: 0; }
-    }
-    .floating-heart {
-      position: absolute;
-      animation: float 4s infinite ease-in;
-      pointer-events: none;
-    }
-    .heart-1 { left: 10%; animation-delay: 0s; }
-    .heart-2 { left: 80%; animation-delay: 1.5s; }
-    .heart-3 { left: 45%; animation-delay: 3s; }
-    .heart-4 { left: 20%; animation-delay: 2.2s; }
-    .heart-5 { left: 70%; animation-delay: 0.8s; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Valentine Proposal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <style>
+        @import url('https://api.fontshare.com/v2/css?f[]=melodrama@600,700&f[]=satoshi@400,500&display=swap');
+
+        :root {
+            --cream: #FFFBF5;
+            --light-pink: #FFD1E3;
+            --primary-pink: #FF89B5;
+            --accent-pink: #FF85A1;
+            --text-dark: #4A3E3E;
+        }
+
+        body {
+            font-family: 'Satoshi', sans-serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            margin: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .font-display {
+            font-family: 'Melodrama', serif;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-80vh) rotate(20deg);
+                opacity: 0;
+            }
+        }
+
+        .heart-particle {
+            position: absolute;
+            bottom: -20px;
+            pointer-events: none;
+            animation: float 4s ease-in infinite;
+            color: var(--primary-pink);
+        }
+
+        @keyframes heart-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .pulse-animation {
+            animation: heart-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .btn-shadow {
+            box-shadow: 0 4px 14px 0 rgba(255, 137, 181, 0.3);
+        }
+    </style>
 </head>
 <body>
-  <div class="w-full h-screen flex flex-col bg-[#FFFBF5] relative overflow-hidden">
-    <!-- Decorative Floating Hearts -->
-    <iconify-icon icon="ph:heart-fill" class="floating-heart heart-1 text-[#FFD1E3] text-2xl" style="bottom: 20%"></iconify-icon>
-    <iconify-icon icon="ph:heart-fill" class="floating-heart heart-2 text-[#FFD1E3] text-3xl" style="bottom: 15%"></iconify-icon>
-    <iconify-icon icon="ph:heart-fill" class="floating-heart heart-3 text-[#FFD1E3] text-xl" style="bottom: 25%"></iconify-icon>
-    <iconify-icon icon="ph:heart-fill" class="floating-heart heart-4 text-[#FFD1E3] text-2xl" style="bottom: 10%"></iconify-icon>
-    <iconify-icon icon="ph:heart-fill" class="floating-heart heart-5 text-[#FFD1E3] text-3xl" style="bottom: 18%"></iconify-icon>
+    <div class="w-full h-screen flex flex-col bg-[#FFFBF5] relative overflow-hidden">
+        <!-- Floating Hearts Background Container -->
+        <div id="heart-container" class="absolute inset-0 pointer-events-none z-0"></div>
 
-    <!-- Header/Status Spacer -->
-    <header class="shrink-0 pt-14 px-8 flex justify-center">
-      <div class="flex items-center gap-1">
-        <div class="w-1 h-1 rounded-full bg-[#FFB5C5]"></div>
-        <div class="w-4 h-1 rounded-full bg-[#FFD1E3]"></div>
-        <div class="w-1 h-1 rounded-full bg-[#FFB5C5]"></div>
-      </div>
-    </header>
+        <!-- Main Content Area -->
+        <main class="flex-1 flex flex-col items-center pt-24 px-8 z-10">
+            
+            <!-- Animated Heart Illustration -->
+            <div class="relative mb-12">
+                <div class="w-48 h-48 bg-white rounded-full flex items-center justify-center shadow-sm border border-[#FFE8ED]">
+                    <div class="pulse-animation">
+                        <iconify-icon icon="ph:heart-fill" class="text-7xl text-[#FF89B5]"></iconify-icon>
+                    </div>
+                </div>
+                <!-- Decorative Dots -->
+                <div class="absolute -top-4 -right-4 w-12 h-12 flex flex-wrap gap-1 opacity-20">
+                    <div class="w-1 h-1 bg-[#FF89B5] rounded-full"></div>
+                    <div class="w-1 h-1 bg-[#FF89B5] rounded-full"></div>
+                    <div class="w-1 h-1 bg-[#FF89B5] rounded-full"></div>
+                    <div class="w-1 h-1 bg-[#FF89B5] rounded-full"></div>
+                </div>
+            </div>
 
-    <!-- Main Content Area -->
-    <main class="flex-1 flex flex-col items-center justify-center px-10 text-center">
-      <!-- Romantic Visual -->
-      <div class="relative mb-10 group">
-        <div class="absolute -inset-4 bg-gradient-to-tr from-[#FFD1E3] to-white rounded-full opacity-20 blur-2xl"></div>
-        <div class="relative w-48 h-48 bg-white rounded-full flex items-center justify-center shadow-[0_8px_30px_rgb(255,209,227,0.3)] border border-[#FFF0F3]">
-          <iconify-icon 
-            icon="solar:heart-bold-duotone" 
-            class="text-8xl text-[#FF8FAB] animate-pulse"
-          ></iconify-icon>
-        </div>
-      </div>
+            <!-- Proposal Text -->
+            <div class="text-center space-y-4">
+                <h1 class="font-display text-4xl leading-tight text-[#4A3E3E]">
+                    Will you be my valentine <span class="text-[#FF89B5]">Koko</span>?
+                </h1>
+                <p class="text-[#7A7A7A] text-lg font-medium">
+                    This will mean a lot to me
+                </p>
+            </div>
+        </main>
 
-      <!-- Text Elements -->
-      <div class="space-y-4">
-        <h1 class="text-4xl font-serif font-bold text-[#4A3E3E] leading-[1.1] px-2">
-          Will you be my <br/>valentine <span class="text-[#FF8FAB] italic">Koko</span>?
-        </h1>
-        <p class="text-[#8C7A7A] text-base leading-relaxed max-w-[240px] mx-auto">
-          This will mean a lot to me
-        </p>
-      </div>
-    </main>
+        <!-- Interaction Footer -->
+        <footer class="shrink-0 pb-[34px] px-8 flex flex-col gap-4 z-10">
+            <a 
+                id="cta-yes-btn"
+                href="celebration.html" 
+                class="flex items-center justify-center h-14 w-full bg-[#FF89B5] text-white rounded-[22px] font-bold text-lg btn-shadow active:scale-95 transition-transform duration-200"
+            >
+                Yes, I'd love to!
+            </a>
+            
+            <button 
+                id="cta-no-btn"
+                onclick="handleNoInteraction()"
+                class="flex items-center justify-center h-14 w-full bg-transparent border-2 border-[#FFE8ED] text-[#4A3E3E] rounded-[22px] font-medium text-lg active:scale-95 transition-all duration-200"
+            >
+                No
+            </button>
+        </footer>
+    </div>
 
-    <!-- Interactive Footer -->
-    <footer class="shrink-0 pb-[34px] px-8 flex flex-col gap-3">
-      <a 
-        id="cta-yes-btn" 
-        href="#"
-        class="w-full h-14 bg-[#FFD1E3] flex items-center justify-center rounded-[22px] text-[#4A3E3E] font-bold text-lg shadow-[0_10px_20px_rgba(255,209,227,0.4)] active:scale-95 transition-transform"
-      >
-        Yes, I'd love to!
-      </a>
-      <button 
-        id="cta-no-btn"
-        class="w-full h-14 bg-transparent border-2 border-[#FFE8ED] flex items-center justify-center rounded-[22px] text-[#A69494] font-medium text-base active:opacity-50 transition-opacity"
-      >
-        No
-      </button>
-      <p class="text-[11px] text-[#C4B7B7] text-center mt-2 tracking-widest uppercase font-medium">
-        Special moments await • 14th Feb
-      </p>
-    </footer>
-  </div>
+    <script>
+        // Create floating hearts
+        const heartContainer = document.getElementById('heart-container');
+        const heartIcons = ['ph:heart-fill', 'ph:heart-duotone', 'ph:heart-bold'];
+        
+        function createHeart() {
+            const heart = document.createElement('div');
+            const icon = document.createElement('iconify-icon');
+            
+            const size = Math.random() * (24 - 12) + 12;
+            const left = Math.random() * 100;
+            const duration = Math.random() * (6 - 3) + 3;
+            const delay = Math.random() * 5;
+            const randomIcon = heartIcons[Math.floor(Math.random() * heartIcons.length)];
 
-  <script>
-    const noBtn = document.getElementById('cta-no-btn');
-    // Simple playful interaction logic
-    noBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const responses = ["Are you sure?", "Think again!", "Pretty please?", "No isn't an option!", "Try again! ✨"];
-      const randomText = responses[Math.floor(Math.random() * responses.length)];
-      noBtn.innerText = randomText;
-      noBtn.style.color = '#FF8FAB';
-    });
-  </script>
+            heart.className = 'heart-particle';
+            heart.style.left = `${left}%`;
+            heart.style.animationDuration = `${duration}s`;
+            heart.style.animationDelay = `${delay}s`;
+            
+            icon.setAttribute('icon', randomIcon);
+            icon.style.fontSize = `${size}px`;
+            
+            heart.appendChild(icon);
+            heartContainer.appendChild(heart);
+
+            // Remove heart after animation ends to keep DOM clean
+            setTimeout(() => {
+                heart.remove();
+            }, (duration + delay) * 1000);
+        }
+
+        // Initialize hearts
+        for(let i = 0; i < 15; i++) {
+            createHeart();
+        }
+        setInterval(createHeart, 600);
+
+        // Interaction for "No" button
+        let noClickCount = 0;
+        const noBtn = document.getElementById('cta-no-btn');
+        const noResponses = [
+            "Are you sure?",
+            "Please?",
+            "Pretty please?",
+            "Koko... please?",
+            "Think about it!"
+        ];
+
+        function handleNoInteraction() {
+            if (noClickCount < noResponses.length) {
+                noBtn.innerText = noResponses[noClickCount];
+                noClickCount++;
+                
+                // Subtle visual cues
+                noBtn.style.transform = `scale(${1 - (noClickCount * 0.05)})`;
+                const yesBtn = document.getElementById('cta-yes-btn');
+                yesBtn.style.transform = `scale(${1 + (noClickCount * 0.05)})`;
+            } else {
+                noBtn.innerText = "Okay, I'll ask again later... 🥺";
+            }
+        }
+    </script>
 </body>
 </html>
