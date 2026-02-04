@@ -1,131 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-  <link href="https://api.fontshare.com/v2/css?f[]=melodrama@400,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Satoshi', sans-serif;
-      background-color: #FFFBF5;
-      overflow: hidden;
-    }
-    .font-serif {
-      font-family: 'Melodrama', serif;
-    }
-    @keyframes fall {
-      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
-    }
-    .confetti {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      top: -10px;
-      animation: fall 4s linear forwards;
-    }
-    .float-slow {
-      animation: float-slow 6s ease-in-out infinite;
-    }
-    @keyframes float-slow {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-20px) scale(1.05); }
-    }
-    .heart-pulse {
-      animation: heart-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-    @keyframes heart-pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Valentine's Day!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=melodrama@300,400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FFFBF5;
+            --soft-pink: #FFD1E3;
+            --primary-pink: #FF89B5;
+            --accent-pink: #FF85A1;
+            --dark-text: #4A3E3E;
+        }
+
+        body {
+            font-family: 'Satoshi', sans-serif;
+            background-color: var(--cream);
+            color: var(--dark-text);
+            overflow: hidden;
+        }
+
+        h1 {
+            font-family: 'Melodrama', serif;
+        }
+
+        @keyframes heart-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .animate-heart-pulse {
+            animation: heart-pulse 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.6; }
+            80% { opacity: 0.6; }
+            100% { transform: translateY(-400px) rotate(20deg); opacity: 0; }
+        }
+        .floating-heart {
+            position: absolute;
+            animation: float-up 6s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            animation: confetti-fall 4s linear forwards;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        .sparkle {
+            animation: sparkle 3s ease-in-out infinite;
+        }
+    </style>
 </head>
 <body>
-  <div class="w-full h-screen flex flex-col bg-[#FFFBF5] relative overflow-hidden">
-    <!-- Confetti Container -->
-    <div id="confetti-container" class="absolute inset-0 pointer-events-none"></div>
-
-    <!-- Header with Back Button -->
-    <header class="shrink-0 pt-14 px-6 z-20">
-      <a id="back-to-proposal-link" href="#" class="w-11 h-11 flex items-center justify-center bg-white/60 backdrop-blur-md rounded-full shadow-sm hover:shadow-md transition-all active:scale-95 group">
-        <iconify-icon icon="lucide:arrow-left" class="text-xl text-[#FF6B95] group-hover:-translate-x-0.5 transition-transform"></iconify-icon>
-      </a>
-    </header>
-
-    <!-- Main Content -->
-    <main class="flex-1 flex flex-col items-center justify-center px-10 text-center relative z-10">
-      <!-- Heart Illustration Area -->
-      <div class="relative mb-10 float-slow">
-        <div class="absolute inset-0 bg-[#FFD1E3] blur-3xl opacity-30 rounded-full"></div>
-        <div class="relative">
-          <iconify-icon icon="ph:heart-fill" class="text-8xl text-[#FF85A1] heart-pulse"></iconify-icon>
-          <iconify-icon icon="ph:heart-fill" class="absolute -top-4 -right-2 text-3xl text-[#FFD1E3]"></iconify-icon>
-          <iconify-icon icon="ph:heart-fill" class="absolute -bottom-2 -left-4 text-2xl text-[#FFD1E3]"></iconify-icon>
+    <div class="w-full h-screen bg-[#FFFBF5] relative overflow-hidden flex flex-col">
+        <!-- Floating Hearts Background Container -->
+        <div id="decoration-container" class="absolute inset-0 pointer-events-none z-0">
+            <!-- JavaScript will inject confetti and floating hearts here -->
         </div>
-      </div>
 
-      <!-- Celebratory Text -->
-      <div class="space-y-6">
-        <h1 class="font-serif text-4xl leading-tight text-[#FF6B95]">
-          Happy <br/>Valentine's Day!
-        </h1>
-        <p class="text-[#7A6B6B] text-lg leading-relaxed font-medium">
-          You make my world brighter <br/>just by being in it.
-        </p>
-      </div>
+        <!-- Header: Back Button -->
+        <header class="shrink-0 pt-14 px-6 z-20">
+            <a href="index.html" id="back-to-proposal" class="w-11 h-11 bg-white/60 backdrop-blur-md rounded-full flex items-center justify-center border border-[#FFD1E3]/30 shadow-sm active:scale-95 transition-all">
+                <iconify-icon icon="lucide:arrow-left" class="text-xl text-[#4A3E3E]"></iconify-icon>
+            </a>
+        </header>
 
-      <!-- Bottom Decor -->
-      <div class="mt-16 flex gap-3 opacity-40">
-        <iconify-icon icon="ph:sparkle-fill" class="text-xl text-[#FFD1E3]"></iconify-icon>
-        <iconify-icon icon="ph:sparkle-fill" class="text-2xl text-[#FFD1E3]"></iconify-icon>
-        <iconify-icon icon="ph:sparkle-fill" class="text-xl text-[#FFD1E3]"></iconify-icon>
-      </div>
-    </main>
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col items-center justify-center px-8 z-10 text-center">
+            <!-- Hero Visual -->
+            <div class="relative mb-10">
+                <!-- Decorative Glow -->
+                <div class="absolute inset-0 bg-[#FFD1E3] blur-3xl opacity-30 rounded-full scale-150"></div>
+                
+                <!-- Central Pulse Heart -->
+                <div class="relative w-40 h-40 bg-white rounded-full flex items-center justify-center shadow-[0_10px_40px_-10px_rgba(255,137,181,0.3)] border-4 border-[#FFD1E3]/20">
+                    <iconify-icon icon="ph:heart-fill" class="text-7xl text-[#FF89B5] animate-heart-pulse"></iconify-icon>
+                    <!-- Small decorative sparkles around the heart -->
+                    <iconify-icon icon="ph:sparkle-fill" class="absolute -top-2 -right-2 text-[#FF85A1] text-2xl sparkle" style="animation-delay: 0.2s"></iconify-icon>
+                    <iconify-icon icon="ph:sparkle-fill" class="absolute -bottom-4 -left-1 text-[#FFD1E3] text-xl sparkle" style="animation-delay: 1s"></iconify-icon>
+                </div>
+            </div>
 
-    <!-- Mobile Footer Safe Area -->
-    <footer class="shrink-0 pb-[34px]"></footer>
+            <!-- Content Text -->
+            <div class="space-y-4 max-w-sm">
+                <h1 class="text-4xl font-semibold leading-tight text-[#4A3E3E]">
+                    Happy <span class="text-[#FF89B5]">Valentine's</span> Day!
+                </h1>
+                <p class="text-lg text-[#4A3E3E]/70 leading-relaxed font-medium">
+                    You make my world brighter just by being in it.
+                </p>
+            </div>
+        </main>
 
-    <!-- Background Decorative Elements -->
-    <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-[#FFD1E3]/20 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -top-20 -right-20 w-48 h-48 bg-[#FFE5D9]/30 rounded-full blur-2xl pointer-events-none"></div>
-  </div>
+        <!-- Footer: Safe Area Padding -->
+        <footer class="shrink-0 pb-[34px] flex justify-center items-center px-8">
+            <div class="flex items-center gap-2 text-[#4A3E3E]/40 text-xs tracking-widest uppercase">
+                <span class="w-8 h-[1px] bg-[#4A3E3E]/20"></span>
+                Forever Yours
+                <span class="w-8 h-[1px] bg-[#4A3E3E]/20"></span>
+            </div>
+        </footer>
+    </div>
 
-  <script>
-    function createConfetti() {
-      const container = document.getElementById('confetti-container');
-      const colors = ['#FFD1E3', '#FF85A1', '#FFFBF5', '#FFC8DD'];
-      const shapes = ['square', 'circle'];
-      
-      for (let i = 0; i < 50; i++) {
-        setTimeout(() => {
-          const confetti = document.createElement('div');
-          confetti.classList.add('confetti');
-          
-          const color = colors[Math.floor(Math.random() * colors.length)];
-          const shape = shapes[Math.floor(Math.random() * shapes.length)];
-          const left = Math.random() * 100;
-          const duration = 3 + Math.random() * 3;
-          const delay = Math.random() * 5;
-          
-          confetti.style.left = left + '%';
-          confetti.style.backgroundColor = color;
-          confetti.style.borderRadius = shape === 'circle' ? '50%' : '2px';
-          confetti.style.animationDuration = duration + 's';
-          confetti.style.animationDelay = delay + 's';
-          
-          container.appendChild(confetti);
-          
-          // Cleanup
-          setTimeout(() => confetti.remove(), (duration + delay) * 1000);
-        }, i * 150);
-      }
-    }
+    <script>
+        function createDecoration() {
+            const container = document.getElementById('decoration-container');
+            const colors = ['#FFD1E3', '#FF89B5', '#FF85A1', '#FFFBF5', '#FFC8DD'];
+            
+            // Create Confetti Initial Burst
+            for (let i = 0; i < 40; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                    confetti.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
+                    confetti.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                    confetti.style.animationDelay = (Math.random() * 2) + 's';
+                    container.appendChild(confetti);
+                    
+                    // Remove confetti after animation
+                    setTimeout(() => confetti.remove(), 6000);
+                }, i * 50);
+            }
 
-    // Initial blast and repeat
-    createConfetti();
-    setInterval(createConfetti, 8000);
-  </script>
+            // Create Continuous Floating Hearts
+            function spawnHeart() {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.style.left = Math.random() * 90 + 5 + 'vw';
+                heart.style.bottom = '-50px';
+                heart.innerHTML = `<iconify-icon icon="ph:heart-fill" style="color: ${colors[Math.floor(Math.random() * colors.length)]}; font-size: ${Math.random() * 20 + 15}px; opacity: 0.4"></iconify-icon>`;
+                heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                container.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 10000);
+            }
+
+            // Spawn hearts every second
+            setInterval(spawnHeart, 1500);
+            // Initial set of hearts
+            for(let i=0; i<8; i++) spawnHeart();
+        }
+
+        window.onload = createDecoration;
+    </script>
 </body>
 </html>
