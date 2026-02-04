@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link href="https://api.fontshare.com/v2/css?f[]=melodrama@400,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Satoshi', sans-serif;
+      background-color: #FFFBF5;
+      overflow: hidden;
+    }
+    .font-serif {
+      font-family: 'Melodrama', serif;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      top: -10px;
+      animation: fall 4s linear forwards;
+    }
+    .float-slow {
+      animation: float-slow 6s ease-in-out infinite;
+    }
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.05); }
+    }
+    .heart-pulse {
+      animation: heart-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes heart-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="w-full h-screen flex flex-col bg-[#FFFBF5] relative overflow-hidden">
+    <!-- Confetti Container -->
+    <div id="confetti-container" class="absolute inset-0 pointer-events-none"></div>
+
+    <!-- Header with Back Button -->
+    <header class="shrink-0 pt-14 px-6 z-20">
+      <a id="back-to-proposal-link" href="#" class="w-11 h-11 flex items-center justify-center bg-white/60 backdrop-blur-md rounded-full shadow-sm hover:shadow-md transition-all active:scale-95 group">
+        <iconify-icon icon="lucide:arrow-left" class="text-xl text-[#FF6B95] group-hover:-translate-x-0.5 transition-transform"></iconify-icon>
+      </a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col items-center justify-center px-10 text-center relative z-10">
+      <!-- Heart Illustration Area -->
+      <div class="relative mb-10 float-slow">
+        <div class="absolute inset-0 bg-[#FFD1E3] blur-3xl opacity-30 rounded-full"></div>
+        <div class="relative">
+          <iconify-icon icon="ph:heart-fill" class="text-8xl text-[#FF85A1] heart-pulse"></iconify-icon>
+          <iconify-icon icon="ph:heart-fill" class="absolute -top-4 -right-2 text-3xl text-[#FFD1E3]"></iconify-icon>
+          <iconify-icon icon="ph:heart-fill" class="absolute -bottom-2 -left-4 text-2xl text-[#FFD1E3]"></iconify-icon>
+        </div>
+      </div>
+
+      <!-- Celebratory Text -->
+      <div class="space-y-6">
+        <h1 class="font-serif text-4xl leading-tight text-[#FF6B95]">
+          Happy <br/>Valentine's Day!
+        </h1>
+        <p class="text-[#7A6B6B] text-lg leading-relaxed font-medium">
+          You make my world brighter <br/>just by being in it.
+        </p>
+      </div>
+
+      <!-- Bottom Decor -->
+      <div class="mt-16 flex gap-3 opacity-40">
+        <iconify-icon icon="ph:sparkle-fill" class="text-xl text-[#FFD1E3]"></iconify-icon>
+        <iconify-icon icon="ph:sparkle-fill" class="text-2xl text-[#FFD1E3]"></iconify-icon>
+        <iconify-icon icon="ph:sparkle-fill" class="text-xl text-[#FFD1E3]"></iconify-icon>
+      </div>
+    </main>
+
+    <!-- Mobile Footer Safe Area -->
+    <footer class="shrink-0 pb-[34px]"></footer>
+
+    <!-- Background Decorative Elements -->
+    <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-[#FFD1E3]/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -top-20 -right-20 w-48 h-48 bg-[#FFE5D9]/30 rounded-full blur-2xl pointer-events-none"></div>
+  </div>
+
+  <script>
+    function createConfetti() {
+      const container = document.getElementById('confetti-container');
+      const colors = ['#FFD1E3', '#FF85A1', '#FFFBF5', '#FFC8DD'];
+      const shapes = ['square', 'circle'];
+      
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.classList.add('confetti');
+          
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          const shape = shapes[Math.floor(Math.random() * shapes.length)];
+          const left = Math.random() * 100;
+          const duration = 3 + Math.random() * 3;
+          const delay = Math.random() * 5;
+          
+          confetti.style.left = left + '%';
+          confetti.style.backgroundColor = color;
+          confetti.style.borderRadius = shape === 'circle' ? '50%' : '2px';
+          confetti.style.animationDuration = duration + 's';
+          confetti.style.animationDelay = delay + 's';
+          
+          container.appendChild(confetti);
+          
+          // Cleanup
+          setTimeout(() => confetti.remove(), (duration + delay) * 1000);
+        }, i * 150);
+      }
+    }
+
+    // Initial blast and repeat
+    createConfetti();
+    setInterval(createConfetti, 8000);
+  </script>
+</body>
+</html>
